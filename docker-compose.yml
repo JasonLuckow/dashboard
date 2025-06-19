@@ -1,0 +1,30 @@
+version: '3'
+services:
+  kafka:
+    extends:
+      file: kafka/docker-compose.kafka.yml
+      service: kafka
+
+  zookeeper:
+    extends:
+      file: kafka/docker-compose.kafka.yml
+      service: zookeeper
+
+  event-producer:
+    build: ./event-producer
+    depends_on:
+      - kafka
+
+  event-consumer:
+    build: ./event-consumer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - kafka
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - event-consumer
