@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-producer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: event-producer
+  template:
+    metadata:
+      labels:
+        app: event-producer
+    spec:
+      containers:
+        - name: event-producer
+          image: jsonluck/event-producer:latest
+          env:
+            - name: KAFKA_BROKER
+              value: kafka:9092
