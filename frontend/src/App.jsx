@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div>
-      <h1>Live User Eventsss</h1>
+      <h1>Live User Events</h1>
       <ul>
         {events.map((e, i) => (
           <li key={i}>{e.timestamp} - User {e.userId} did {e.type}</li>
